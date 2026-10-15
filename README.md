@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -900,4 +899,3 @@ requestAnimationFrame(frame);
 </script>
 </body>
 </html>
-```
