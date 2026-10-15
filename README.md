@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -109,11 +108,11 @@ input[type=checkbox]{accent-color:var(--green)}
 <small>주행 중에도 문을 열고 닫을 수 있습니다. 문이 열린 상태에서도 주행이 가능합니다. 부저 주파수는 슬라이더로 조절하세요.</small>
 </div>
 <div class="section">
-<h2>하부 방수 짐칸</h2><div class="status">짐칸 상태: <b id="cargoState">모든 짐칸 닫힘</b></div>
+<h2>하부 짐칸</h2><div class="status">짐칸 상태: <b id="cargoState">모든 짐칸 닫힘</b></div>
 <div class="cargo-layout"><small>버스 측면 하부 배치 개념도 · 앞쪽 → 뒤쪽</small><div class="bus-bottom">
 <div class="cargo small" id="cargoBox1"><b>짐칸 1</b><span class="tag">절반 크기</span><svg viewBox="0 0 100 28"><rect x="8" y="4" width="84" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg><div class="row"><button id="cargo1Open">열기</button><button id="cargo1Close">닫기</button></div></div>
-<div class="cargo large" id="cargoBox2"><b>짐칸 2</b><span class="tag">방수</span><svg viewBox="0 0 100 28"><rect x="8" y="4" width="84" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg><div class="row"><button id="cargo2Open">열기</button><button id="cargo2Close">닫기</button></div></div>
-<div class="cargo large" id="cargoBox3"><b>짐칸 3</b><span class="tag">방수</span><svg viewBox="0 0 100 28"><rect x="8" y="4" width="84" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg><div class="row"><button id="cargo3Open">열기</button><button id="cargo3Close">닫기</button></div></div>
+<div class="cargo large" id="cargoBox2"><b>짐칸 2</b><span class="tag">일반</span><svg viewBox="0 0 100 28"><rect x="8" y="4" width="84" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg><div class="row"><button id="cargo2Open">열기</button><button id="cargo2Close">닫기</button></div></div>
+<div class="cargo large" id="cargoBox3"><b>짐칸 3</b><span class="tag">일반</span><svg viewBox="0 0 100 28"><rect x="8" y="4" width="84" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg><div class="row"><button id="cargo3Open">열기</button><button id="cargo3Close">닫기</button></div></div>
 </div><small>짐칸 1은 짐칸 2·3의 절반 크기입니다.</small></div>
 <small>짐칸은 정차 상태에서만 조작할 수 있습니다.</small>
 </div>
@@ -150,7 +149,7 @@ function toggleMode(){if(s.speed>.1){notify("모드 변경은 완전 정차 상�
 function setClutch(v){if(s.mode!=="manual"){if(v)notify("클러치는 수동 모드에서만 작동합니다.");return}s.clutch=v;render()}
 function setSignal(v){s.hazard=false;s.signal=s.signal===v?"off":v;render()}
 
-/* 문 개폐는 속도, 정류장 위치, 반대편 문 상태와 관계없이 상시 조작 가능 */
+/* 출입문은 주행 여부와 관계없이 언제든 열고 닫을 수 있음 */
 function setDoor(side,open){
  if(s.doorBusy)return;
  if(open){
@@ -264,8 +263,8 @@ $("hazard").onclick=()=>{s.hazard=!s.hazard;s.signal="off";render()};$("horn").o
 $("openL").onclick=()=>setDoor("left",true);$("closeL").onclick=()=>setDoor("left",false);$("openR").onclick=()=>setDoor("right",true);$("closeR").onclick=()=>setDoor("right",false);
 $("testOpen").onclick=()=>doorBeep("open");$("testClose").onclick=()=>doorBeep("close");$("openFreq").oninput=render;$("closeFreq").oninput=render;
 for(let i=1;i<=3;i++){
- $("cargo"+i+"Open").onclick=()=>{if(s.speed>.1){notify("정차 후 짐칸을 조작하세요.");return}s.cargo[i-1]=true;s.cruise=null;notify("하부 방수 짐칸 "+i+" 열림");render()};
- $("cargo"+i+"Close").onclick=()=>{if(s.speed>.1){notify("주행 중에는 짐칸을 조작할 수 없습니다.");return}s.cargo[i-1]=false;notify("하부 방수 짐칸 "+i+" 닫힘");render()}
+ $("cargo"+i+"Open").onclick=()=>{if(s.speed>.1){notify("정차 후 짐칸을 조작하세요.");return}s.cargo[i-1]=true;s.cruise=null;notify("하부 짐칸 "+i+" 열림");render()};
+ $("cargo"+i+"Close").onclick=()=>{if(s.speed>.1){notify("주행 중에는 짐칸을 조작할 수 없습니다.");return}s.cargo[i-1]=false;notify("하부 짐칸 "+i+" 닫힘");render()}
 }
 $("landMode").onclick=()=>{s.terrain="land";notify("육상 주행 모드 · 경부고속도로");render()};
 $("waterMode").onclick=()=>{if(s.speed>.1){notify("수상 주행 모드 전환은 완전 정차 후 가능합니다.");return}s.terrain="water";notify("수상 주행 모드 전환 · 수륙양용 시뮬레이션");render()};
