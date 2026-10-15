@@ -137,10 +137,10 @@ footer{text-align:center;color:var(--muted);padding:15px}
     </div>
     <div class="status">도어 부저: <b id="buzzerStatus">대기</b></div>
     <div class="section">
-      <div class="between"><label for="openFreq">문 열림 부저 주파수</label><b id="openFreqText">880 Hz</b></div>
-      <input id="openFreq" type="range" min="200" max="2500" step="10" value="500">
+    <div class="between"><label for="openFreq">문 열림 부저 주파수</label><b id="openFreqText">500 Hz</b></div>
+    <input id="openFreq" type="range" min="500" max="580" step="10" value="500">
       <div class="between"><label for="closeFreq">문 닫힘 부저 주파수</label><b id="closeFreqText">580 Hz</b></div>
-      <input id="closeFreq" type="range" min="200" max="2500" step="10" value="660">
+      <input id="closeFreq" type="range" min="500" max="580" step="10" value="580">
       <div class="between"><label for="buzzerVolume">부저 음량</label><b id="buzzerVolumeText">35%</b></div>
       <input id="buzzerVolume" type="range" min="0" max="100" step="1" value="50">
       <div class="row">
